@@ -5,12 +5,35 @@
     
     <style>
     
+        dl {
+  list-style-type: none;
+
+        }
+
+
+
+/*
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111111;
+}
+        
+*/
+        
         textarea {
             -webkit-border-radius: 10px;
             -moz-border-radius: 10px;
             border-radius: 10px;
             border-color: dodgerblue;
-            border-style:inset;
+            border-style: ridge;
+            border-width: thick;
         }
         
         
@@ -148,6 +171,12 @@
     
     <center><bruh>Debatur</bruh></center>
    
+    
+    
+    
+    
+    
+    
 <script>
   // Initialize Firebase
   var config = {
@@ -182,7 +211,7 @@
                 myphotodiv = document.getElementById("myphoto");
                 myphotodiv.innerHTML = "<img src='" + imageUrl + "'/>";
 
-                firebase.database().ref('/').once('value').then(function(snapshot) {
+                firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
                       console.log("No data found at /tweets");  
@@ -218,31 +247,41 @@
         }
         
         function updatetweets(data) {
-            console.log(data); 
-            var mylist = "<ul>";
-            for (var u in data.tweets) {
-                console.log(data[u]);
-                for (var t in data.tweets[u]) {
-                    console.log(data.tweets[u][t].tweet);
-                    mylist = mylist + "<li>" + data.tweets[u][t].tweet + " (" + data.users[u].email + ")</li>";
-                } 
+//            console.log(data); 
+            var mylist = "<dl>";
+            for (var u in data) {
+                var d = new Date(data[u].time);
+                var t = d.toString();
+//                console.log(data[u]);
+               
+                mylist = mylist + "<li>" + data[u].tweet + " (" + t + ")</li>";
             }
-            mylist = mylist + "</ul>";
-            console.log(mylist);
+            mylist = mylist + "</dl>";
             var mytdiv = document.getElementById("mytweets");
             mytdiv.innerHTML = mylist;
         }
+//                for (var t in data.tweets[u]) {
+//                    console.log(data.tweets[u][t].tweet);
+//                    mylist = mylist + "<li>" + data.tweets[u][t].tweet + " (" + data.users[u].email + ")</li>";
+//                } 
+//            }
+//            mylist = mylist + "</ul>";
+//          //  console.log(mylist);
+//            var mytdiv = document.getElementById("mytweets");
+//            mytdiv.innerHTML = mylist;
+//        }
         
         // write tweets to firebase
         function tweet() {
             
-            twitdoc = document.getElementById("twit");
+            var twitdoc = document.getElementById("textarea");
             var nameValue = twitdoc.value;
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue});
+            var js_time = Date.now();
+            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time});
             twitdoc.value = "";
             console.log("tweet written")
             
-            firebase.database().ref().once('value').then(function(snapshot) {
+            firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
                       console.log("No data found at /tweets");  
@@ -293,10 +332,10 @@
         
      <center>
         <form>
-            Start a debate:<br>
+            <h3>Start a debate:</h3>
             <textarea id="textarea" type="text" name="thetweet" cols="100" rows="4"></textarea>
         </form> 
-        <button type="button" id="submit" onclick="tweet()">Submit</button>
+        <button type="button" id="submit" onclick="tweet()" >Submit</button>
     
     <div id="mytweets"></div>
     <div id="mydata"></div>
