@@ -293,6 +293,25 @@ li a:hover {
                 });
             } // end user null check
         }); // end check auth state
+    
+        function encodeImageFileAsURL() {
+
+            var filesSelected = document.getElementById("inputFileToLoad").files;
+            if (filesSelected.length > 0) {
+                var fileToLoad = filesSelected[0];
+                var fileReader = new FileReader();
+                fileReader.onload = function(fileLoadedEvent) {
+                    var srcData = fileLoadedEvent.target.result; // <--- data: base64
+                    //var newImage = document.createElement('img');
+                    //newImage.src = srcData;
+                    //document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+                    document.getElementById("imgTest").innerHTML = srcData;
+                    //console.log("Converted Base64 version is: " + document.getElementById("imgTest").innerHTML);
+                    console.log(srcData);
+                }
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        } // end function
         
         // write user data
         function writeUserData(userId, name, email, imageUrl) {
@@ -303,7 +322,7 @@ li a:hover {
             });
         }
         
-        function updatetweets(data) {
+/*        function updatetweets(data) {
 //            console.log(data); 
             var mylist = "<dl>";
             
@@ -330,7 +349,41 @@ li a:hover {
 //          //  console.log(mylist);
 //            var mytdiv = document.getElementById("mytweets");
 //            mytdiv.innerHTML = mylist;
-//        }
+//        }*/
+
+ function updatetweets(data) {
+            //var mylist = "<ul>";
+            var mytab = "<table>";
+            users = data[1]; // put on top, because changed data - not good coding change later
+            data = data[0];
+            
+            for (var u in data) {
+                for (var t in data[u]) {
+                    mytab = mytab + "<tr>";
+                    var date = new Date(data[u][t].time);
+                    var time = date.toString();
+                    if (data[u][t].img != "") {
+                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td>" + users[u].email + "</td>";
+                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
+                    } else {
+                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td>" + users[u].email + "</td>";
+                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td>" + time + "</td>";
+                        
+                        
+                    } 
+                    mytab = mytab + "</tr>";
+                }   
+            }
+            //mylist = mylist + "</ul>";
+            mytab = mytab + "</table>"
+            var mytdiv = document.getElementById("mytweets");
+            //mytdiv.innerHTML = mylist;
+            mytdiv.innerHTML = mytab;
+        }
         
         // write tweets to firebase
         function tweet() {
@@ -344,9 +397,11 @@ li a:hover {
             
             
             var twitdoc = document.getElementById("textarea");
+            var twitimg = document.getElementById("imgTest");
             var nameValue = twitdoc.value;
             var js_time = Date.now("MM/dd/yyyy");
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time});
+            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time, img: imgValue});
+            var imgValue = twitimg.innerHTML;
             twitdoc.value = "";
             console.log("tweet written")
             
@@ -354,10 +409,17 @@ li a:hover {
                     var data = (snapshot.val());
                     if (data == null) {
                       console.log("No data found at /tweets");  
-                    } else {
-                      updatetweets(data);
+                    }else { 
+                        firebase.database().ref('/users').once('value').then(function(snapshot) { 
+                        var userdata = (snapshot.val());
+                        if (userdata != null) {
+                           dataarray = [data,userdata]
+                           console.log(dataarray)
+                           updatetweets(dataarray); 
+                        }
+                      });
                     }
-                });
+            });
             
             // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
             
@@ -410,6 +472,9 @@ li a:hover {
          
          <a href="#like" id="like" onclick="like()" >Like</a>
         </div>
+    
+         <br><input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
+        <div id="imgTest" style="display:none;"></div>
          
          
     <div id="mytweets"></div>
