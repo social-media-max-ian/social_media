@@ -89,6 +89,55 @@ li a:hover {
             
         }
         
+        #like {
+            
+            border-radius: 5px;
+            background-color: dodgerblue;
+            padding: 2px;
+            height: 33;
+            width: 55;
+            color: white;
+            
+        }
+        
+/*
+      #like a:hover {
+            
+            background-color: dodgerblue;
+            color: red;
+            
+        }
+*/
+        
+        .likenav {
+           background-color: white;
+            overflow:hidden;
+        }
+        
+
+        .likenav a {
+/*
+            float: left;
+            color: #f2f2f2;
+*/
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }  
+
+        
+        
+        .likenav a:hover {
+            background-color: dodgerblue;
+            color: red;=][p0;o0lp'[]']
+        }
+        
+        .likenav a.active {
+            background-color: #4CAF50;
+            color: dodgerblue;
+        }
+        
         #submit {
             
             border-radius: 5px;
@@ -99,6 +148,8 @@ li a:hover {
             color: aliceblue;
             
         }
+        
+        
         
         #outdiv {
             
@@ -178,6 +229,9 @@ li a:hover {
     
     
 <script>
+    
+    var likeNumber = 0;
+    
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyBfaucR0E-MJzu9vKEpBde8n39dYk4nkGU",
@@ -189,6 +243,9 @@ li a:hover {
   };
   firebase.initializeApp(config);
 
+    
+   
+    
     
                 
         // Check to see if you are logged in
@@ -249,12 +306,16 @@ li a:hover {
         function updatetweets(data) {
 //            console.log(data); 
             var mylist = "<dl>";
+            
+            
+            
+            
             for (var u in data) {
                 var d = new Date(data[u].time);
                 var t = d.toString();
 //                console.log(data[u]);
                
-                mylist = mylist + "<li>" + data[u].tweet + " (" + t + ")</li>";
+                mylist = mylist + "<li>" + data[u].tweet + " (" + t.substr(4, [17]) + ")</li>";
             }
             mylist = mylist + "</dl>";
             var mytdiv = document.getElementById("mytweets");
@@ -274,9 +335,17 @@ li a:hover {
         // write tweets to firebase
         function tweet() {
             
+            function like() {
+                
+                likeNumber++;
+                $(this).text(likeNumber);
+                
+            }
+            
+            
             var twitdoc = document.getElementById("textarea");
             var nameValue = twitdoc.value;
-            var js_time = Date.now();
+            var js_time = Date.now("MM/dd/yyyy");
             var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time});
             twitdoc.value = "";
             console.log("tweet written")
@@ -332,11 +401,17 @@ li a:hover {
         
      <center>
         <form>
-            <h3>Start a debate:</h3>
+          <h3>Start a debate:</h3>
             <textarea id="textarea" type="text" name="thetweet" cols="100" rows="4"></textarea>
         </form> 
         <button type="button" id="submit" onclick="tweet()" >Submit</button>
     
+         <div class="likenav">
+         
+         <a href="#like" id="like" onclick="like()" >Like</a>
+        </div>
+         
+         
     <div id="mytweets"></div>
     <div id="mydata"></div>
     <div id="myphoto"></div>
