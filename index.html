@@ -1,12 +1,3 @@
-
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> eb5e93068277aee23a474bccb931cadc4aff59f5
 <html>
 
     <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
@@ -16,11 +7,7 @@
     
         dl {
   list-style-type: none;
-
         }
-
-
-
 /*
 li a {
   display: block;
@@ -29,7 +16,6 @@ li a {
   padding: 16px;
   text-decoration: none;
 }
-
 li a:hover {
   background-color: #111111;
 }
@@ -92,16 +78,6 @@ li a:hover {
             
         }
         
-/*
-        #debatur {
-            
-           
-         
-            color: white;
-            
-        }
-*/
-        
         #debate {
             
             
@@ -128,24 +104,21 @@ li a:hover {
         }
 */
         
-/*
         .likenav {
            background-color: white;
             overflow:hidden;
         }
         
-
         .likenav a {
-
+/*
             float: left;
             color: #f2f2f2;
-
+*/
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
             font-size: 17px;
         }  
-
         
         
         .likenav a:hover {
@@ -157,7 +130,6 @@ li a:hover {
             background-color: #4CAF50;
             color: dodgerblue;
         }
-*/
         
         #submit {
             
@@ -179,18 +151,11 @@ li a:hover {
         }
         
         .topnav {
-            
            background-color: dodgerblue;
             overflow: hidden;
-            position: fixed; /* Set the navbar to fixed position */
-        top: 0; 
-        width: 100%; 
-            
         }
         
-
         .topnav a {
-       
             float: left;
             color: #f2f2f2;
             text-align: center;
@@ -198,7 +163,6 @@ li a:hover {
             text-decoration: none;
             font-size: 17px;
         }  
-
         
         
         .topnav a:hover {
@@ -212,14 +176,12 @@ li a:hover {
         }
         
 /*
-
           
         .debaturnav {
            background-color: dodgerblue;
             overflow: hidden;
         }
         
-
         .debaturnav a {
             float: left;
             color: #f2f2f2;
@@ -228,7 +190,6 @@ li a:hover {
             text-decoration: none;
             font-size: 17px;
         }  
-
         
         
         .debaturnav a:hover {
@@ -240,18 +201,12 @@ li a:hover {
             background-color: #4CAF50;
             color: white;
         }
-
 */
-
         
         
     </style>
     
-<<<<<<< HEAD
-    <br><br><br><br><center><bruh>Debatur</bruh></center>
-=======
     <center><bruh>Debatur</bruh></center>
->>>>>>> eb5e93068277aee23a474bccb931cadc4aff59f5
     
     <script>
         
@@ -285,7 +240,6 @@ li a:hover {
                 mydiv.innerHTML = name
                 myphotodiv = document.getElementById("myphoto");
                 myphotodiv.innerHTML = "<img src='" + imageUrl + "'/>";
-
                 firebase.database().ref('/tweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
@@ -308,7 +262,6 @@ li a:hover {
         }); // end check auth state
         
         function encodeImageFileAsURL() {
-
             var filesSelected = document.getElementById("inputFileToLoad").files;
             if (filesSelected.length > 0) {
                 var fileToLoad = filesSelected[0];
@@ -332,41 +285,9 @@ li a:hover {
                 username: name,
                 email: email,
                 profile_picture : imageUrl
-                
             });
         }
         
-//        
-//        function updatetweets(data) {
-////            console.log(data); 
-//            var mylist = "<dl>";
-//            
-//            
-//            
-//            
-//            for (var u in data) {
-//                var d = new Date(data[u].time);
-//                var t = d.toString();
-////                console.log(data[u]);
-//               
-//                mylist = mylist + "<li>" + data[u].tweet + " (" + t.substr(4, [17]) + ")</li>";
-//            }
-//            mylist = mylist + "</dl>";
-//            var mytdiv = document.getElementById("mytweets");
-//            mytdiv.innerHTML = mylist;
-//        }
-////                for (var t in data.tweets[u]) {
-////                    console.log(data.tweets[u][t].tweet);
-////                    mylist = mylist + "<li>" + data.tweets[u][t].tweet + " (" + data.users[u].email + ")</li>";
-////                } 
-////            }
-////            mylist = mylist + "</ul>";
-////          //  console.log(mylist);
-////            var mytdiv = document.getElementById("mytweets");
-////            mytdiv.innerHTML = mylist;
-////        }
-//        
-//        
         function updatetweets(data) {
             //var mylist = "<ul>";
             var mytab = "<table>";
@@ -374,20 +295,10 @@ li a:hover {
             data = data[0];
             
             for (var u in data) {
-<<<<<<< HEAD
-
-//                mytab = mytab + "<td>" + data[u].tweet + " (" + t.substr(4, [17]) + ")</td>";
-                
-=======
->>>>>>> eb5e93068277aee23a474bccb931cadc4aff59f5
                 for (var t in data[u]) {
                     mytab = mytab + "<tr>";
                     var date = new Date(data[u][t].time);
                     var time = date.toString();
-<<<<<<< HEAD
-                    
-=======
->>>>>>> eb5e93068277aee23a474bccb931cadc4aff59f5
                     if (data[u][t].img != "") {
                         mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
                         mytab = mytab + "<td>" + users[u].email + "</td>";
@@ -399,14 +310,8 @@ li a:hover {
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "</td>";
                         
-<<<<<<< HEAD
-
-                    } 
-                   
-=======
                         
                     } 
->>>>>>> eb5e93068277aee23a474bccb931cadc4aff59f5
                     mytab = mytab + "</tr>";
                 }   
             }
@@ -465,41 +370,20 @@ li a:hover {
             });
         }
         
-
     
     </script>
 
 <body>
-<<<<<<< HEAD
-    
-    <div class="topnav">
-        
-            <a href="#signin" id="in" onclick="signin()"><h3> Sign in</h3></a>
-         
-
-        
-        <a href="#signout" id="out" onclick="signout()"><h3>Sign out</h3></a>
-            </div>
-    
-        <br>
-<!--        <a href="fbtest.json" target="_target">JSON Firebase rules for database</a><br>-->
-    <center>
-=======
         <button onclick="signin()">Sign in</button>
         <button onclick="signout()">Sign out</button>
         <br>
         <a href="fbtest.json" target="_target">JSON Firebase rules for database</a><br>
     
->>>>>>> eb5e93068277aee23a474bccb931cadc4aff59f5
         <form>
             Tweet:<br>
             <textarea id="twit" type="text" name="thetweet" cols="100" rows="4"></textarea>
         </form> 
-<<<<<<< HEAD
-        <button type="button" onclick="tweet()" id="submit">Submit</button>
-=======
         <button type="button" onclick="tweet()">Submit</button>
->>>>>>> eb5e93068277aee23a474bccb931cadc4aff59f5
     
         <br><input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
         <div id="imgTest" style="display:none;"></div>
@@ -508,11 +392,7 @@ li a:hover {
     <div id="mydata"></div>
     <div id="myphoto"></div>
         
-<<<<<<< HEAD
-  </center>      
-=======
         
->>>>>>> eb5e93068277aee23a474bccb931cadc4aff59f5
         
         
     </body>
