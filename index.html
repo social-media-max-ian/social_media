@@ -4,12 +4,6 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <style>
-        
-        
-        
-  
-        
-        
         body {
             background-image: url(backimg.jpeg);
         }
@@ -30,8 +24,6 @@ li a:hover {
 }
         
 */
-        
-   
         
         textarea {
             -webkit-border-radius: 10px;
@@ -63,11 +55,9 @@ li a:hover {
             border-radius: 5px;
             background-color: dodgerblue;
             padding: 2px;
-            height: 43;
-            width: 95;
+            height: 33;
+            width: 55;
             color: aliceblue;
-            float: left;
-            font-size: 15;
             
         }
         
@@ -76,21 +66,15 @@ li a:hover {
             border-radius: 5px;
             background-color: dodgerblue;
             padding: 2px;
-            height: 43;
-            width: 95;
+            height: 33;
+            width: 55;
             color: aliceblue;
             float: right;
-            font-size: 15;
             
         }
 
         
-        
-        #out {
-            
-            float: right;
-            
-        }
+   
         
         #debate {
             
@@ -219,13 +203,10 @@ li a:hover {
         
         
     </style>
-    <header>
+    
     <center><bruh>Debatur</bruh></center>
-    </header>
     
     
-    
-
     
     
     <script>
@@ -314,17 +295,11 @@ li a:hover {
             users = data[1]; // put on top, because changed data - not good coding change later
             data = data[0];
             
-            
-            
             for (var u in data) {
                 for (var t in data[u]) {
                     mytab = mytab + "<tr>";
                     var date = new Date(data[u][t].time);
-                    var time = date.toString.substring(1, 17);
-                    
-                    
-                    
-                    
+                    var time = date.toString();
                     if (data[u][t].img != "") {
                         mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
                         mytab = mytab + "<td>" + users[u].email + "</td>";
@@ -335,19 +310,16 @@ li a:hover {
                         mytab = mytab + "<td>" + users[u].email + "</td>";
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "</td>";
-                        
-                        
+                       // mytab = mytab + "<td>" + <button onclick="typeWriter()">Click me</button> + "</td>";                        
                     } 
                     mytab = mytab + "</tr>";
-                }   
+                }  
             }
             //mylist = mylist + "</ul>";
             mytab = mytab + "</table>"
             var mytdiv = document.getElementById("mytweets");
             //mytdiv.innerHTML = mylist;
             mytdiv.innerHTML = mytab;
-            
-            
         }
         
         // write tweets to firebase
@@ -361,8 +333,6 @@ li a:hover {
             var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time, img: imgValue});
             twitdoc.value = "";
             console.log("tweet written")
-            
-            
             
             firebase.database().ref('/tweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
@@ -379,24 +349,10 @@ li a:hover {
                       });
                     }
                 });
-
             
             
-//             function myFunction(x) {
-//                x.classList.toggle("fa-thumbs-down");
-//             }
+            
             // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
-            
-//            /* Open when someone clicks on the span element */
-//            function openNav() {
-//                document.getElementById("myNav").style.width = "100%";
-//            }
-//
-///* Close when someone clicks on the "x" symbol inside the overlay */
-//            function closeNav() {
-//                document.getElementById("myNav").style.width = "0%";
-//            }
-//            
             
         }
         
@@ -414,63 +370,43 @@ li a:hover {
             });
         }
         
-   
         
+        
+        var i = 0;
+        var txt = 'Lorem ipsum typing effect!'; /* The text */
+        var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("demo").innerHTML += txt.charAt(i);
+                i++;
+        setTimeout(typeWriter, speed);
+            }
+        }   
+        
+        
+        
+        
+    
     </script>
 
 <body>
     
-    
-    
-    
-    
-    
-    
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <p id="demo"></p>
 
-<!-- Use an element to toggle between a like/dislike icon -->
-<!--<i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>-->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <!-- The overlay -->
-<!--<div id="myNav" class="overlay">-->
-
-  <!-- Button to close the overlay navigation -->
-<!--  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
-
-  <!-- Overlay content -->
-  
-
-
-
-<!-- Use any element to open/show the overlay navigation menu -->
-<!--<button onclick="openNav()">open nav</button>-->
-    
-    
-    
-    
-    
-    
-    
+<button onclick="typeWriter()">Click me</button>    
     
     
         <button id="in" onclick="signin()">Sign in</button>
         <button id="out" onclick="signout()">Sign out</button>
         <br>
-<!--        <a href="fbtest.json" target="_target">JSON Firebase rules for database</a><br>-->
-    <center>
+        <a href="fbtest.json" target="_target">JSON Firebase rules for database</a><br>
+    
         <form>
             Tweet:<br>
             <textarea id="twit" type="text" name="thetweet" cols="100" rows="4"></textarea>
         </form> 
-        <button type="button" id="submit"onclick="tweet()">Submit</button>
+        <button type="button" onclick="tweet()">Submit</button>
     
         <br><input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
         <div id="imgTest" style="display:none;"></div>
@@ -478,8 +414,8 @@ li a:hover {
     <div id="mytweets"></div>
     <div id="mydata"></div>
     <div id="myphoto"></div>
-        </center>
-<!--        <img src="avatar.png" alt="Avatar" class="avatar">-->
+        
+        
         
         
     </body>
