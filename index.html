@@ -58,6 +58,7 @@ li a:hover {
             height: 33;
             width: 55;
             color: aliceblue;
+            float: left;
             
         }
         
@@ -82,7 +83,7 @@ li a:hover {
             
         }
         
-        #like {
+        #info {
             
             border-radius: 5px;
             background-color: dodgerblue;
@@ -299,7 +300,8 @@ li a:hover {
                 for (var t in data[u]) {
                     mytab = mytab + "<tr>";
                     var date = new Date(data[u][t].time);
-                    var time = date.toString();
+                    var time1 = date.toString();
+                    var time = time1.substr(4, [11]);
                     if (data[u][t].img != "") {
                         mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
                         mytab = mytab + "<td>" + users[u].email + "</td>";
@@ -310,7 +312,6 @@ li a:hover {
                         mytab = mytab + "<td>" + users[u].email + "</td>";
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "</td>";
-                       // mytab = mytab + "<td>" + <button onclick="typeWriter()">Click me</button> + "</td>";                        
                     } 
                     mytab = mytab + "</tr>";
                 }  
@@ -373,7 +374,7 @@ li a:hover {
         
         
         var i = 0;
-        var txt = 'Lorem ipsum typing effect!'; /* The text */
+        var txt = 'Welcome to Debatur! This is a social media website in progress. Check back later to see if the website actually works.'; /* The text */
         var speed = 50; /* The speed/duration of the effect in milliseconds */
 
         function typeWriter() {
@@ -391,16 +392,16 @@ li a:hover {
     </script>
 
 <body>
-    
+   <center>
     <p id="demo"></p>
 
-<button onclick="typeWriter()">Click me</button>    
+<button id="info"onclick="typeWriter()">Info</button>   <br><br><br>
     
     
         <button id="in" onclick="signin()">Sign in</button>
+     
         <button id="out" onclick="signout()">Sign out</button>
         <br>
-        <a href="fbtest.json" target="_target">JSON Firebase rules for database</a><br>
     
         <form>
             Tweet:<br>
@@ -417,7 +418,7 @@ li a:hover {
         
         
         
-        
+        </center>
     </body>
 
     
