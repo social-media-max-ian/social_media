@@ -201,11 +201,92 @@ li a:hover {
             color: white;
         }
 */
+        table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+td, th {
+  border: 0px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+        #avatar{
+            border-radius: 50%;
+            border: 1px solid dodgerblue;
+        }
         
+        .container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+        
+        .icon-bar {
+  width: 100%; /* Full-width */
+  background-color: #555; /* Dark-grey background */
+  overflow: auto; /* Overflow due to float */
+}
+
+.icon-bar a {
+  float: left; /* Float links side by side */
+  text-align: center; /* Center-align text */
+  width: 20%; /* Equal width (5 icons with 20% width each = 100%) */
+  padding: 12px 0; /* Some top and bottom padding */
+  transition: all 0.3s ease; /* Add transition for hover effects */
+  color: white; /* White text color */
+  font-size: 36px; /* Increased font size */
+}
+
+.icon-bar a:hover {
+  background-color: #000; /* Add a hover color */
+}
+
+.active {
+  background-color: dodgerblue; /* Add an active/current color */
+}
         
     </style>
     
-    <center><bruh>Debatur</bruh></center>
     
     
     
@@ -303,12 +384,12 @@ li a:hover {
                     var time1 = date.toString();
                     var time = time1.substr(4, [11]);
                     if (data[u][t].img != "") {
-                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td><img id='avatar' src='" + users[u].profile_picture + "' width='50px'></td>";
                         mytab = mytab + "<td>" + users[u].username + "</td>";
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
                     } else {
-                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td><img id='avatar' src='" + users[u].profile_picture + "' width='50px'></td>";
                         mytab = mytab + "<td>" + users[u].username + "</td>";
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "</td>";
@@ -392,6 +473,15 @@ li a:hover {
     </script>
 
 <body>
+    <div class="icon-bar">
+  <a class="active" href="#"><i class="fa fa-home"></i></a> 
+  <a href="#"><i class="fa fa-search"></i></a> 
+  <a href="#"><i class="fa fa-envelope"></i></a> 
+  <a href="#"><i class="fa fa-globe"></i></a>
+  <a href="#"><i class="fa fa-trash"></i></a> 
+</div>
+    
+     <center><bruh>Debatur</bruh></center>
    <center>
     <p id="demo"></p>
 
