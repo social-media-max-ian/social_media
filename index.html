@@ -1,3 +1,5 @@
+
+
 <html>
 
     <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
@@ -7,6 +9,31 @@
         body {
             background-image: url(backimg.jpeg);
         }
+        
+        
+        
+         img{
+/*            width: 100%;*/
+            max-width: 150px;
+            max-height: 150px;
+            border-color: black;
+            border-width: 5px;
+        }
+        
+         .zoom {
+            transition: transform .25s; /* Animation */
+        }
+    
+        .zoom:hover {
+            transform: scale(2.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+        
+        img:hover {
+            transition: transform .50s; /* Animation */
+            transform: scale(2.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+        
+        
     
         dl {
   list-style-type: none;
@@ -49,7 +76,6 @@ li a:hover {
             
         }
         
-
         #in {
             
             border-radius: 5px;
@@ -73,7 +99,6 @@ li a:hover {
             float: right;
             
         }
-
         
    
         
@@ -206,13 +231,11 @@ li a:hover {
   border-collapse: collapse;
   width: 50%;
 }
-
 td, th {
   border: 0px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
-
 tr:nth-child(even) {
   background-color: #dddddd;
 }
@@ -225,13 +248,11 @@ tr:nth-child(even) {
   position: relative;
   width: 50%;
 }
-
 .image {
   display: block;
   width: 100%;
   height: auto;
 }
-
 .overlay {
   position: absolute;
   top: 0;
@@ -244,11 +265,9 @@ tr:nth-child(even) {
   transition: .5s ease;
   background-color: #008CBA;
 }
-
 .container:hover .overlay {
   opacity: 1;
 }
-
 .text {
   color: white;
   font-size: 20px;
@@ -266,7 +285,6 @@ tr:nth-child(even) {
   background-color: #555; /* Dark-grey background */
   overflow: auto; /* Overflow due to float */
 }
-
 .icon-bar a {
   float: left; /* Float links side by side */
   text-align: center; /* Center-align text */
@@ -276,11 +294,9 @@ tr:nth-child(even) {
   color: white; /* White text color */
   font-size: 36px; /* Increased font size */
 }
-
 .icon-bar a:hover {
   background-color: #000; /* Add a hover color */
 }
-
 .active {
   background-color: dodgerblue; /* Add an active/current color */
 }
@@ -288,7 +304,7 @@ tr:nth-child(even) {
     </style>
     
     
-    
+
     
     
     <script>
@@ -384,12 +400,12 @@ tr:nth-child(even) {
                     var time1 = date.toString();
                     var time = time1.substr(4, [11]);
                     if (data[u][t].img != "") {
-                        mytab = mytab + "<td><img id='avatar' src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td><img id='avatar' class = 'zoom' src='" + users[u].profile_picture + "' width='50px'></td>";
                         mytab = mytab + "<td>" + users[u].username + "</td>";
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
                     } else {
-                        mytab = mytab + "<td><img id='avatar' src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td><img id='avatar' class = 'zoom' src='" + users[u].profile_picture + "' width='50px'></td>";
                         mytab = mytab + "<td>" + users[u].username + "</td>";
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "</td>";
@@ -457,7 +473,6 @@ tr:nth-child(even) {
         var i = 0;
         var txt = 'Welcome to Debatur! This is a social media website in progress. Check back later to see if the website actually works.'; /* The text */
         var speed = 50; /* The speed/duration of the effect in milliseconds */
-
         function typeWriter() {
             if (i < txt.length) {
                 document.getElementById("demo").innerHTML += txt.charAt(i);
