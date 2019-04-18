@@ -78,25 +78,12 @@ li a:hover {
         
         #in {
             
-            border-radius: 5px;
-            background-color: dodgerblue;
-            padding: 2px;
-            height: 33;
-            width: 55;
-            color: aliceblue;
-            float: left;
-            
-        }
-        
-        #out {
-            
-            border-radius: 5px;
-            background-color: dodgerblue;
-            padding: 2px;
-            height: 33;
-            width: 55;
-            color: aliceblue;
-            float: right;
+         float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
             
         }
         
@@ -244,6 +231,12 @@ tr:nth-child(even) {
             border: 1px solid dodgerblue;
         }
         
+        #pfp{
+            border-radius: 50%;
+            border: 1px solid dodgerblue;
+            width: 40px;
+        }
+        
         .container {
   position: relative;
   width: 50%;
@@ -282,7 +275,7 @@ tr:nth-child(even) {
         
         .icon-bar {
   width: 100%; /* Full-width */
-  background-color: #555; /* Dark-grey background */
+  background-color: #dddddd; /* Dark-grey background */
   overflow: auto; /* Overflow due to float */
 }
 .icon-bar a {
@@ -295,10 +288,80 @@ tr:nth-child(even) {
   font-size: 36px; /* Increased font size */
 }
 .icon-bar a:hover {
-  background-color: #000; /* Add a hover color */
+  background-color: dodgerblue; /* Add a hover color */
 }
 .active {
   background-color: dodgerblue; /* Add an active/current color */
+}
+        
+        /* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #dddddd;
+  font-family: Arial;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px; 
+  border: none;
+  outline: none;
+  color: dodgerblue;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: dodgerblue;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: dodgerblue;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
         
     </style>
@@ -338,7 +401,7 @@ tr:nth-child(even) {
                 mydiv = document.getElementById("mydata");
                 mydiv.innerHTML = name
                 myphotodiv = document.getElementById("myphoto");
-                myphotodiv.innerHTML = "<img src='" + imageUrl + "'/>";
+                myphotodiv.innerHTML = "<img id='pfp' src='" + imageUrl + "'/>";
                 firebase.database().ref('/tweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
@@ -488,24 +551,50 @@ tr:nth-child(even) {
     </script>
 
 <body>
-    <div class="icon-bar">
+    <!--<div class="icon-bar">
   <a class="active" href="#"><i class="fa fa-home"></i></a> 
   <a href="#"><i class="fa fa-search"></i></a> 
   <a href="#"><i class="fa fa-envelope"></i></a> 
   <a href="#"><i class="fa fa-globe"></i></a>
-  <a href="#"><i class="fa fa-trash"></i></a> 
+  <a href="#"><i id="myphoto"></i></a> 
+        <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
 </div>
+    
+    <div class="navbar">
+  <div class="dropdown">
+    <a href="#">
+      <i id="myphoto"></i>
+      </a>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div> 
+</div>-->
+    
+<div class="navbar">
+  <div class="dropdown">
+    <button class="dropbtn"> 
+      <i id="myphoto"></i>
+    </button>
+    <div class="dropdown-content">
+    <a href="#" onclick="signin()">Sign in</a>
+    <a href="#" onclick-"signout()">Sign out</a>
+    </div>
+ </div>
+</div>
+
     
      <center><bruh>Debatur</bruh></center>
    <center>
     <p id="demo"></p>
 
 <button id="info"onclick="typeWriter()">Info</button>   <br><br><br>
-    
-    
-        <button id="in" onclick="signin()">Sign in</button>
-     
-        <button id="out" onclick="signout()">Sign out</button>
         <br>
     
         <form>
