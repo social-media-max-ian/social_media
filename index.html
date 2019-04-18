@@ -1,5 +1,4 @@
-
-
+     
 <html>
 
     <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
@@ -14,10 +13,13 @@
         
          img{
 /*            width: 100%;*/
-            max-width: 150px;
-            max-height: 150px;
+            max-width: 100px;
+            max-height: 100px;
             border-color: black;
             border-width: 5px;
+               -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
         }
         
          .zoom {
@@ -30,7 +32,7 @@
         
         img:hover {
             transition: transform .50s; /* Animation */
-            transform: scale(2.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            transform: scale(2.0); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
         
         
@@ -224,7 +226,7 @@ td, th {
   padding: 8px;
 }
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: #e6f0ff;
 }
         #avatar{
             border-radius: 50%;
@@ -300,7 +302,6 @@ tr:nth-child(even) {
   background-color: #dddddd;
   font-family: Arial;
 }
-
 /* Links inside the navbar */
 .navbar a {
   float: left;
@@ -310,13 +311,11 @@ tr:nth-child(even) {
   padding: 14px 16px;
   text-decoration: none;
 }
-
 /* The dropdown container */
 .dropdown {
   float: left;
   overflow: hidden;
 }
-
 /* Dropdown button */
 .dropdown .dropbtn {
   font-size: 16px; 
@@ -328,12 +327,10 @@ tr:nth-child(even) {
   font-family: inherit; /* Important for vertical align on mobile phones */
   margin: 0; /* Important for vertical align on mobile phones */
 }
-
 /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
   background-color: dodgerblue;
 }
-
 /* Dropdown content (hidden by default) */
 .dropdown-content {
   display: none;
@@ -343,7 +340,6 @@ tr:nth-child(even) {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
-
 /* Links inside the dropdown */
 .dropdown-content a {
   float: none;
@@ -353,12 +349,10 @@ tr:nth-child(even) {
   display: block;
   text-align: left;
 }
-
 /* Add a grey background color to dropdown links on hover */
 .dropdown-content a:hover {
   background-color: dodgerblue;
 }
-
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
