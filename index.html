@@ -110,6 +110,17 @@ li a:hover {
             
         }
         
+        #inputFileToLoad {
+            border-radius: 5px;
+            background-color: dodgerblue;
+            padding: 2px;
+            /*height: 33;*/
+            color: white;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            
+        }
+        
 /*
       #like a:hover {
             
@@ -583,6 +594,7 @@ tr:nth-child(even) {
     <a href="#" onclick-"signout()">Sign out</a>
     </div>
  </div>
+    <p style="padding-top: 10px" id="mydata"></p>
 </div>
 
     
@@ -599,8 +611,9 @@ tr:nth-child(even) {
         </form> 
         <button type="button" id="submit" onclick="tweet()">Submit</button>
     
-        <br><input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
+       <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
         <div id="imgTest" style="display:none;"></div>
+
         
     <div id="mytweets"></div>
     <div id="mydata"></div>
