@@ -305,7 +305,7 @@ tr:nth-child(even) {
                 email = user.email;
                     
                 // write user data to users
-                 updateInfo();
+                 updateData();
                 //writeUserData(userId, name, email, imageUrl);
                 
                 // write data to document
@@ -437,7 +437,7 @@ tr:nth-child(even) {
             alert("You are now following " + newName);
         }*/
         
-        function updateInfo() {
+        function updateData() {
                         
             var infoUname = "";
             var infoPic = "";
@@ -537,9 +537,12 @@ tr:nth-child(even) {
             
         
 
-        
-   
-        
+//        
+//   function updateData() {
+//           var userId = document.getElementById("uid").innerHTML;
+//           firebase.database().ref('/tweets/' + userId).update({tweet:"Update replaces data, but will leave non replaced data as is"}); 
+//       }
+//        
         
     
     </script>
@@ -574,7 +577,7 @@ tr:nth-child(even) {
         <br>
     
        
-       <button onclick="location.reload();">Refresh Page</button>
+       <button onclick="updateData()">Refresh Page</button>
        
        
         <div id="imgTest" style="display:none;"></div>
@@ -599,7 +602,7 @@ tr:nth-child(even) {
         <div id="imgTest" style="display:none;"></div>
         <br><br>
         <p>Change or Add a Bio:</p>
-        <textarea id="newBio"></textarea> <button onclick="chgBio()">Submit</button> <br><br><br> <button onclick="updateInfo()">Reload</button>
+        <textarea id="newBio"></textarea> <button onclick="chgBio()">Submit</button> <br><br><br> 
         <br><br>
         <hr>
         
