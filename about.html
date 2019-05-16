@@ -15,7 +15,46 @@
     <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-    
+    <style>
+    .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 200px;
+        border-radius: 10px;
+        float: left;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background-color: rgba(30, 144, 255, 0.2) ;
+}
+
+.container {
+  padding: 2px 8px;
+}
+        
+        img {
+  border-radius: 10px 10px 0 0;
+            max-height: 200px;
+            max-width: 200px;
+}
+        img:hover {
+            transition: transform .50s; /* Animation */
+            transform: scale(1.0); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+        #container {
+    width: 500px;
+    margin: auto;
+}
+        #third{
+            width: 100px;
+            float: left;
+            height: 400px;
+        }
+#clear {
+    clear: both;
+}
+    </style>
     
     
 
@@ -167,9 +206,32 @@
     <p id="demo"></p>
        <p>Debateur is a free, online debating platform, which is feature rich and easy to use.</p>
        <br>
+       <p>About the creators:</p>
+       <br>
+       <br>
        <center>
-       <img src="max.png" width="100px" style="padding: 100px">
-       <img src="ian.png" width="100px" style="padding: 100px">
+           
+           
+<div id="container">           
+<div class="card" id="first">
+  <img src="ian.png" alt="Avatar" style="width:400px">
+  <div class="container">
+    <h4><b>Ian Vyse</b></h4> 
+    <p>Sans Undertale</p> 
+  </div>
+</div>
+    <div id="third"></div>
+           <div class="card" id="second">
+  <img src="max.png" alt="Avatar" style="width:400px">
+  <div class="container">
+    <h4><b>Max Rivett</b></h4> 
+    <p>Architect & Engineer</p> 
+  </div>
+</div>
+</div>
+           
+           
+           
         </center>
 
         <br>
