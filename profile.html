@@ -22,7 +22,6 @@
         
         
      //  location.reload(); 
-
         
         
         
@@ -145,7 +144,6 @@
         }
         
         function encodeImageFileAsURL() {
-
             var filesSelected = document.getElementById("inputFileToLoad").files;
             if (filesSelected.length > 0) {
                 var fileToLoad = filesSelected[0];
@@ -253,7 +251,6 @@
         function showFollowersButton() {
             document.getElementById("sFbutton").style.display = "block";
         }
-
 //        
 //        // write tweets to firebase
 //        function tweet() {
@@ -288,7 +285,6 @@
             // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
             
         
-
 //        
 //   function updateData() {
 //           var userId = document.getElementById("uid").innerHTML;
@@ -348,12 +344,12 @@
         <input type="text" id="uName">
         <button onclick="uNameChg()">Submit</button>
         <br><br>
+        <p>Change or Add a Bio:</p>
+        <textarea id="newBio"></textarea> <button onclick="chgBio()">Submit</button> <br><br><br> 
+    
         <p>Change or Add a Profile Picture:</p>
         <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" /> <button onclick="chgPic()">Submit</button>
         <div id="imgTest" style="display:none;"></div>
-        <br><br>
-        <p>Change or Add a Bio:</p>
-        <textarea id="newBio"></textarea> <button onclick="chgBio()">Submit</button> <br><br><br> 
         <br><br>
         <hr>
         
