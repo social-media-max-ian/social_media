@@ -1,4 +1,4 @@
-      
+     
 <html>
 
     <link rel="shortcut icon" href="d.ico"/>
@@ -132,6 +132,22 @@
             mytdiv.innerHTML = mytab;
         }
         
+        
+        if(value="small") {
+            
+            
+            
+        } else if(value="medium") {
+            
+            
+            
+        } else {
+            
+            
+            
+        }
+        
+        
         // write tweets to firebase
         function tweet() {
             
@@ -229,6 +245,13 @@
             Tweet:<br>
             <textarea id="twit" type="text" name="thetweet" cols="100" rows="4"></textarea>
         </form> 
+       
+       <input type="checkbox" name="service"
+              value="small"  /> 12px <input type="checkbox" name="service"
+            value="medium" /> 14px
+       <input type="checkbox" name="service"
+       value="large" /> 16px 
+       
         <button type="button" id="submit" onclick="tweet()">Submit</button>
     
        <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
