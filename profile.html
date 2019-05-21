@@ -128,8 +128,8 @@
                     alert("Your username has already been taken! Think of something more unique.");
                 } else {
                 
-            if (newName.length > 13) {
-                alert("Your username cannot be longer than 13 characters");
+            if (newName.length > 17) {
+                alert("Your username cannot be longer than 17 characters");
             } else {
             firebase.database().ref('users/' + userId).update({
                 username2: newName

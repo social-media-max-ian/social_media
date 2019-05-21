@@ -92,7 +92,7 @@
         
         // write user data
         function writeUserData(userId, name, email, imageUrl) {
-            firebase.database().ref('users/' + userId).set({
+            firebase.database().ref('users/' + userId).update({
                 username: name,
                 email: email,
                 profile_picture : imageUrl
@@ -113,12 +113,12 @@
                     var time = time1.substr(4, [11]);
                     if (data[u][t].img != "") {
                         mytab = mytab + "<td><img id='avatar' class = 'zoom' src='" + users[u].profile_picture + "' width='50px'></td>";
-                        mytab = mytab + "<td>" + users[u].username + "</td>";
+                        mytab = mytab + "<td>" + users[u].username2 + "</td>";
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
                     } else {
                         mytab = mytab + "<td><img id='avatar' class = 'zoom' src='" + users[u].profile_picture + "' width='50px'></td>";
-                        mytab = mytab + "<td>" + users[u].username + "</td>";
+                        mytab = mytab + "<td>" + users[u].username2 + "</td>";
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "</td>";
                     } 
@@ -246,11 +246,13 @@
             <textarea id="twit" type="text" name="thetweet" cols="100" rows="4"></textarea>
         </form> 
        
+<!--
        <input type="checkbox" name="service"
               value="small"  /> 12px <input type="checkbox" name="service"
             value="medium" /> 14px
        <input type="checkbox" name="service"
        value="large" /> 16px 
+-->
        
         <button type="button" id="submit" onclick="tweet()">Submit</button>
     
