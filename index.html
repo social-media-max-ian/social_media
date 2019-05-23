@@ -134,13 +134,13 @@
                     }
                     if (data[u][t].img != "") {
                         mytab = mytab + "<td><img id='avatar' class = 'zoom' src='" + users[u].profile_picture2 + "' width='50px'></td>";
-                        mytab = mytab + "<td>" + users[u].username2 + "</td>";
+                        mytab = mytab + "<td>" + users[u].username2 + " (" + users[u].username + ")" + "</td>";
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
                         mytab = mytab + "<td><button id='like" + count + "' onclick=like(" + count + ",'" +u +"','"+t+"')>" + likecount + "</button></td>";
                     } else {
                         mytab = mytab + "<td><img id='avatar' class = 'zoom' src='" + users[u].profile_picture2 + "' width='50px'></td>";
-                        mytab = mytab + "<td>" + users[u].username2 + "</td>";
+                        mytab = mytab + "<td>" + users[u].username2 + " (" + users[u].username + ")" + "</td>";
                         mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
                         mytab = mytab + "<td>" + time + "</td>";
                         mytab = mytab + "<td><button id='like" + count + "' onclick=like(" + count + ",'" +u +"','"+t+"')>" + likecount + "</button></td>";
