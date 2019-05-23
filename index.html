@@ -51,6 +51,7 @@
                 mydiv.innerHTML = name
                 myphotodiv = document.getElementById("myphoto");
                 myphotodiv.innerHTML = "<img id='pfp' src='" + imageUrl + "'/>";
+                
                 /*
                 firebase.database().ref('/tweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
@@ -216,7 +217,6 @@
             
             
             // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
-            
         }
         
         function signin() {

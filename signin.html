@@ -41,7 +41,6 @@
                 name = user.displayName;
                 imageUrl = user.photoURL;
                 email = user.email;
-                window.location.replace("profile.html");
                     
                 // write user data to users
                 writeUserData(userId, name, email, imageUrl);
@@ -100,38 +99,7 @@
             });
         }
         
-        function updatetweets(data) {
-            //var mylist = "<ul>";
-            var mytab = "<table>";
-            users = data[1]; // put on top, because changed data - not good coding change later
-            data = data[0];
-            
-            for (var u in data) {
-                for (var t in data[u]) {
-                    mytab = mytab + "<tr>";
-                    var date = new Date(data[u][t].time);
-                    var time1 = date.toString();
-                    var time = time1.substr(4, [11]);
-                    if (data[u][t].img != "") {
-                        mytab = mytab + "<td><img id='avatar' class = 'zoom' src='" + users[u].profile_picture + "' width='50px'></td>";
-                        mytab = mytab + "<td>" + users[u].username + "</td>";
-                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
-                        mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
-                    } else {
-                        mytab = mytab + "<td><img id='avatar' class = 'zoom' src='" + users[u].profile_picture + "' width='50px'></td>";
-                        mytab = mytab + "<td>" + users[u].username + "</td>";
-                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
-                        mytab = mytab + "<td>" + time + "</td>";
-                    } 
-                    mytab = mytab + "</tr>";
-                }  
-            }
-            //mylist = mylist + "</ul>";
-            mytab = mytab + "</table>"
-            var mytdiv = document.getElementById("mytweets");
-            //mytdiv.innerHTML = mylist;
-            mytdiv.innerHTML = mytab;
-        }
+
         
         // write tweets to firebase
         function tweet() {
@@ -171,8 +139,8 @@
             console.log("Signing in");
             var provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithRedirect(provider).then(function(result) { 
-                window.location.replace("profile.html");
             });
+            document.getElementById('signin').disabled = true;
             
         }
         
@@ -180,6 +148,135 @@
             console.log("Signing out");
             firebase.auth().signOut().then(function() {
             });
+        }
+        
+        function enter(){
+            window.location.replace("index.html");
+        }
+        
+        function uNameChg() {
+            
+            var uNameOK = true;
+            var newName = document.getElementById("uName").value;
+            
+            firebase.database().ref('/users').once('value').then(function(snapshot) { 
+                var userdata = (snapshot.val());
+                    dataarray = [userdata]
+                    console.log(dataarray);
+                users = dataarray[0];
+                
+                for (var u in users) {
+                    if (newName == users[u].username || newName == users[u].username2) {
+                        uNameOK = false;
+                    }
+                }
+                
+//                for (i = 0; i < newName.length; i++) {
+//                    if (newName.substring(i, i+1) == " ") {
+//                        uNameOK = false;
+//                    }
+//                }
+                
+                if (!uNameOK) {
+                    alert("Your username has already been taken! Think of something more unique.");
+                } else {
+                
+            if (newName.length > 17) {
+                alert("Your username cannot be longer than 17 characters");
+            } else {
+            firebase.database().ref('users/' + userId).update({
+                username2: newName
+            });
+            alert("Check out your new username! If it doesn't appear immediately please refresh the page!");
+            }
+               
+                }
+                    
+            });
+            
+        }
+        
+        function chgPic() {
+            var newPic = document.getElementById("imgTest").innerHTML;
+            firebase.database().ref('users/' + userId).update({
+                profile_picture2: newPic
+            });
+            alert("You have a new profile picture. Hopefully it is not explicit because we have no filter. If it doesn't appear immediately please refresh the page!");
+        }
+        function chgBio() {
+            var newBio = document.getElementById("newBio").value;
+            if (newBio.length > 150) {
+                alert("Sadly, your bio cannot be longer than 150 characters. Try to cut it down a bit!");
+            } else {
+            firebase.database().ref('users/' + userId).update({
+                bio: newBio
+            });
+            alert("Check out your new bio! If it doesn't appear immediately please refresh the page!");
+            }
+        }
+        function updateData() {
+                        
+            var infoUname = "";
+            var infoPic = "";
+            var infoBio = "";
+            
+            followers = [] + 1;
+            
+            firebase.database().ref('/users').once('value').then(function(snapshot) { 
+                var userdata = (snapshot.val());
+                    dataarray = [userdata]
+                    console.log(dataarray);
+                users = dataarray[0];
+                
+                    for (var u in users) {
+                        if (users[u].username == name) {
+                            if (users[u].username2 != null) {
+                                infoUname = users[u].username2;
+                            } else {
+                                infoUname = users[u].username;
+                            }
+                            if (users[u].bio != null) {
+                                infoBio = users[u].bio;
+                            }
+                            if (users[u].profile_picture2 != null) {
+                                infoPic = users[u].profile_picture2;
+                            } else {
+                                infoPic = users[u].profile_picture;
+                            }
+                            for (var x in users[u].followers) {
+                                var alreadyAdded = false;
+                                for (i = 0; i < followers.length; i++) {
+                                    if (followers[i] == users[u].followers[x].user) {
+                                        alreadyAdded = true;
+                                    }
+                                }
+                                if (!alreadyAdded) {
+                                    followers[followers.length] = users[u].followers[x].user;
+                                }
+                            }
+                            if (followers.length - 1 > 0) {
+                                showFollowersButton();
+                            }
+                            document.getElementById("YourProfile").innerHTML = "<center><h4>Username:</h4>" + infoUname + " <br><br> <h4>Followers: </h4>" + (followers.length - 1).toString() + " <br><br> <h4>Bio: </h4>" + infoBio + " <br><br> <h4>Profile Pic: </h4><img src = '" + infoPic + "' width = 444px></center>";
+                        }
+                    }
+                
+                
+            });
+        }
+        
+        function showFollowers() {
+            var display = "<br>";
+            for (i = 0; i < followers.length; i++) {
+                if (followers[i] != name) {
+                    display = display + "-  " + followers[i] + "<br>";
+                }
+            }
+            document.getElementById("followersArea").innerHTML = display;
+        }
+        
+        function showFollowersButton() {
+            document.getElementById("sFbutton").style.display = "block";
         }
         
         
@@ -204,14 +301,66 @@
 <body>
     
     
-
+    
+    
+    
+<div class="navbar">
+  <div class="dropdown">
+    <button class="dropbtn"> 
+      <i id="myphoto"></i>
+    </button>
+    <div class="dropdown-content">
+    <a href="index.html">Home</a>
+    <a href="#" onclick="signout()">Sign out</a>
+    <a href="search.html">Search</a>
+    <a href="about.html">About</a>
+    </div>
+ </div>
+    <p style="padding-top: 10px" id="mydata"></p>
+</div>
 
     
      <center><bruh>Debatur</bruh></center>
-    <br>
-    <center><button id="info" onclick="signin()">Sign In</button></center>
+   <center>
+    <p id="demo"></p>
 
+        <br>
+       
+       
+        <div id="imgTest" style="display:none;"></div>
+
+        
+    <div id="mytweets"></div>
+    <div id="mydata"></div>
+    <div id="myphoto"></div>
+        
+        
+       
+       
+        <button id="info" onclick="signin()">Sign In</button>
+<!--        <h2>Thinking About Changing Your Profile?:</h2>-->
+        <br>
+        <p>Set Your Userame:</p>
+        <input type="text" id="uName">
+        <button onclick="uNameChg()">Submit</button>
+        <br><br>
+        <p>Add a Bio:</p>
+        <textarea id="newBio"></textarea> <button onclick="chgBio()">Submit</button> <br><br><br> 
+    
+        <p>Set a Profile Picture:</p>
+        <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" /> <button onclick="chgPic()">Submit</button>
+        <div id="imgTest" style="display:none;"></div>
+        <br><br>
+       
+       <button id="info" onclick="enter()">Enter</button>
+    
+       
+       
+       
+        
+        </center>
     </body>
+
 
     
 
