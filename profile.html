@@ -230,7 +230,7 @@
                             if (followers.length - 1 > 0) {
                                 showFollowersButton();
                             }
-                            document.getElementById("YourProfile").innerHTML = "<center><h4>Username:</h4>" + infoUname + " <br><br> <h4>Followers: </h4>" + (followers.length - 1).toString() + " <br><br> <h4>Bio: </h4>" + infoBio + " <br><br> <h4>Profile Pic: </h4><img src = '" + infoPic + "' width = 444px></center>";
+                            document.getElementById("YourProfile").innerHTML = "<center><h4>Username:</h4>" + infoUname + " <br><br> <h4>Followers (not working quite yet): </h4>" + (followers.length - 1).toString() + " <br><br> <h4>Bio: </h4>" + infoBio + " <br><br> <h4>Profile Pic: </h4><img src = '" + infoPic + "' width = 444px></center>";
                         }
                     }
                 
@@ -251,7 +251,12 @@
         function showFollowersButton() {
             document.getElementById("sFbutton").style.display = "block";
         }
-//        
+    
+    
+    
+//  
+    
+    
 //        // write tweets to firebase
 //        function tweet() {
 //            
@@ -359,8 +364,7 @@
         
         <br> <br>
         
-        <center><button id="sFbutton" onclick = "showFollowers()" style="display: none" class="button-xlarge">Show followers</button>
-        <b><h4><div id="followersArea"></div></h4></b></center>
+    
         
         <br> <br> <hr> <br>
 
