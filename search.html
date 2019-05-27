@@ -1,4 +1,4 @@
-      
+     
 <html>
 
     <link rel="shortcut icon" href="d.ico"/>
@@ -22,6 +22,21 @@
     
     
     <script>
+        
+        
+        var i = 0;
+        var txt = 'Debatur Search is a work in progress! Come back soon to see if it works.'; /* The text */
+        var speed = 50; /* The speed/duration of the effect in milliseconds */
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("demo").innerHTML += txt.charAt(i);
+                i++;
+        setTimeout(typeWriter, speed);
+            }
+        }   
+        
+        
+        
         
         // Initialize Firebase
   var config = {
@@ -85,7 +100,6 @@
             });
         }
         
-
         
         // write tweets to firebase
         function tweet() {
@@ -260,7 +274,7 @@
 
         <br>
     
-       
+       <button id="info"onclick="typeWriter()">Info</button>   <br><br><br>
        
        
        
